@@ -16,7 +16,7 @@ enum MovieError: Error {
 class MovieStore {
     var allMovies = [Movie]()
     static let movieStore = MovieStore()
-    
+    let genericPosterImageData = UIImage(named: "moviePosterGeneric")?.pngData()
     private let session: URLSession = {
         let config = URLSessionConfiguration.default
         return URLSession(configuration: config)
@@ -98,7 +98,17 @@ class MovieStore {
         return movie
     }
     
-
+    @discardableResult func addMovie(movie: Movie) -> Movie {
+        var movieThumb = UIImage()
+        if let posterPath = movie.poster_path {
+            let url = URL(string: "https://image.tmdb.org/t/p/original/\(posterPath)")!
+            if let data = try? Data(contentsOf: url) { movieThumb = UIImage(data: data)! }
+            else { movieThumb = UIImage(data: self.genericPosterImageData!)! }
+        }
+        let newMovie = Movie(title: movie.title, year: movie.year ?? 0000, thumb: movieThumb, id: nil, release_date: nil)
+        allMovies.append(newMovie)
+        return newMovie
+    }
     
 //
     func removeMovie(_ movie: Movie) {

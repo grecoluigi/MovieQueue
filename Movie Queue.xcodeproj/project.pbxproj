@@ -23,6 +23,7 @@
 		817FC10824ACE12100F93933 /* MovieCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 817FC10724ACE12100F93933 /* MovieCell.swift */; };
 		8189404224FC0F95003DB70D /* AddManuallyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8189404124FC0F95003DB70D /* AddManuallyController.swift */; };
 		819EB21F24F06722003ECC59 /* SearchMovieController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 819EB21E24F06722003ECC59 /* SearchMovieController.swift */; };
+		81AAA38B26AA281100A48B83 /* MovieResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81AAA38A26AA281100A48B83 /* MovieResults.swift */; };
 		81AC9C3A24AF6ECF006BC35A /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81AC9C3924AF6ECF006BC35A /* Movie.swift */; };
 		81AC9C3E24AF71F0006BC35A /* MovieStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81AC9C3D24AF71F0006BC35A /* MovieStore.swift */; };
 /* End PBXBuildFile section */
@@ -67,6 +68,7 @@
 		817FC10724ACE12100F93933 /* MovieCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCell.swift; sourceTree = "<group>"; };
 		8189404124FC0F95003DB70D /* AddManuallyController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddManuallyController.swift; sourceTree = "<group>"; };
 		819EB21E24F06722003ECC59 /* SearchMovieController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchMovieController.swift; sourceTree = "<group>"; };
+		81AAA38A26AA281100A48B83 /* MovieResults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieResults.swift; sourceTree = "<group>"; };
 		81AC9C3924AF6ECF006BC35A /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = SOURCE_ROOT; };
 		81AC9C3D24AF71F0006BC35A /* MovieStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieStore.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -123,6 +125,7 @@
 				81AC9C3924AF6ECF006BC35A /* Movie.swift */,
 				8139356126A3307200D49F39 /* MovieService.swift */,
 				81AC9C3D24AF71F0006BC35A /* MovieStore.swift */,
+				81AAA38A26AA281100A48B83 /* MovieResults.swift */,
 				8100A9FD24ACD3A400176E5A /* AppDelegate.swift */,
 				8100A9FF24ACD3A400176E5A /* SceneDelegate.swift */,
 				8100AA0124ACD3A400176E5A /* ViewController.swift */,
@@ -304,6 +307,7 @@
 				8100AA2E24ACD63700176E5A /* ManageTitlesController.swift in Sources */,
 				8115D72424F25B69003D9DBF /* TMDB_API.swift in Sources */,
 				81AC9C3A24AF6ECF006BC35A /* Movie.swift in Sources */,
+				81AAA38B26AA281100A48B83 /* MovieResults.swift in Sources */,
 				8139356226A3307200D49F39 /* MovieService.swift in Sources */,
 				8100A9FE24ACD3A400176E5A /* AppDelegate.swift in Sources */,
 				817FC10824ACE12100F93933 /* MovieCell.swift in Sources */,

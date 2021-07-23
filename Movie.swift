@@ -13,7 +13,8 @@ class Movie: Equatable, Codable {
     let id: Int?
     let poster_path: URL?
     let thumb: Data?
-    let year: Int?
+    var year: Int?
+    var isAddedToList: Bool?
     private let release_date: String?
     
     static let dateFormatter: DateFormatter = {
@@ -38,6 +39,7 @@ class Movie: Equatable, Codable {
             self.id = id
             self.poster_path = nil //TODO sistemare
             self.release_date = release_date
+            self.isAddedToList = false
         }
         static func ==(lhs: Movie, rhs: Movie) -> Bool {
             return lhs.title == rhs.title && lhs.release_date == rhs.release_date
