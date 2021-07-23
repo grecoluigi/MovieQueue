@@ -12,7 +12,7 @@ class Movie: Equatable, Codable {
     let title: String
     let id: Int?
     let poster_path: URL?
-    let thumb: Data?
+    var thumb: Data?
     var year: Int?
     var isAddedToList: Bool?
     private let release_date: String?

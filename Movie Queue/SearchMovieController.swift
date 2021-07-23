@@ -55,15 +55,16 @@ class SearchMovieController : UITableViewController, UISearchBarDelegate {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("didSelectRowAt:", indexPath)
         tableView.deselectRow(at: indexPath, animated: true)
         guard let cell = tableView.cellForRow(at: indexPath) else { return }
             cell.accessoryType = .checkmark
         let movie = MovieResults.movieResults.allResults[indexPath.row]
-        movie.isAddedToList = true
+        if movie.isAddedToList == false {
+            movie.isAddedToList = true
+            MovieStore.movieStore.addMovie(movie: MovieResults.movieResults.allResults[indexPath.row])
+        }
         //            isTapped = true
         //            selectedCellPath = indexPath
-        MovieStore.movieStore.addMovie(movie: MovieResults.movieResults.allResults[indexPath.row])
         tableView.reloadRows(at: [indexPath], with: .none)
         tableView.selectRow(at: indexPath, animated: true, scrollPosition: .middle)
     }
@@ -72,10 +73,13 @@ class SearchMovieController : UITableViewController, UISearchBarDelegate {
         let cell = tableView.dequeueReusableCell(withIdentifier: "SearchMovieCell", for: indexPath) as! SearchMovieCell
         let movie = MovieResults.movieResults.allResults[indexPath.row]
         cell.titleLabel.text = movie.title
-        if let posterPath = movie.poster_path {
-            let url = URL(string: "https://image.tmdb.org/t/p/original/\(posterPath)")!
-            if let data = try? Data(contentsOf: url) { cell.posterImgView.image = UIImage(data: data) }
-            else { cell.posterImgView.image = UIImage(data: self.genericPosterImageData!) }
+//        if let posterPath = movie.poster_path {
+//            let url = URL(string: "https://image.tmdb.org/t/p/original/\(posterPath)")!
+//            if let data = try? Data(contentsOf: url) { cell.posterImgView.image = UIImage(data: data) }
+//            else { cell.posterImgView.image = UIImage(data: self.genericPosterImageData!) }
+//        }
+        DispatchQueue.main.async {
+            cell.posterImgView.image = UIImage(data: movie.thumb!)
         }
         if movie.isAddedToList! {
             cell.accessoryType = .checkmark
@@ -102,6 +106,13 @@ class SearchMovieController : UITableViewController, UISearchBarDelegate {
                 MovieResults.movieResults.allResults.removeAll()
                 for movie in movies {
                     MovieResults.movieResults.allResults.append(movie)
+                    DispatchQueue.main.async {
+                        if let posterPath = movie.poster_path {
+                            let url = URL(string: "https://image.tmdb.org/t/p/original/\(posterPath)")!
+                            if let data = try? Data(contentsOf: url) { movie.thumb = data }
+                            else { movie.thumb = self.genericPosterImageData }
+                        }
+                    }
                     movie.isAddedToList = false
                     print("Name: \(movie.title), Poster URL: \(movie.poster_path!), Released: \(movie.releaseDate!)")
                 }
