@@ -16,7 +16,6 @@ class Movie: Equatable, Codable {
     var year: Int?
     var isAddedToList: Bool?
     private let release_date: String?
-    
     static let dateFormatter: DateFormatter = {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"

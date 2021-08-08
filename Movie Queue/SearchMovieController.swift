@@ -99,7 +99,7 @@ class SearchMovieController : UITableViewController, UISearchBarDelegate {
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        print("Search: \(searchText)")
+        //print("Search: \(searchText)")
         store.searchMovies(query: searchText) { (moviesResult) in
             switch moviesResult {
             case let .success(movies):
@@ -114,9 +114,12 @@ class SearchMovieController : UITableViewController, UISearchBarDelegate {
                         }
                     }
                     movie.isAddedToList = false
-                    print("Name: \(movie.title), Poster URL: \(movie.poster_path!), Released: \(movie.releaseDate!)")
+                    //print("Name: \(movie.title), Poster URL: \(movie.poster_path!), Released: \(movie.releaseDate!)")
                 }
-                self.tableView.reloadData()
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
+ 
             case let .failure(error):
                 print(error)
             }
