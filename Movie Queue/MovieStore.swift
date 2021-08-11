@@ -25,17 +25,23 @@ class MovieStore {
     func searchMovies(query: String, completion: @escaping (Result<[Movie], Error>) -> Void){
         let url = TMDB_API.movieSearchURL(query: query)
         print(url)
-        DispatchQueue.main.async {
-            let request = URLRequest(url: url)
-            let task = self.session.dataTask(with: request){
-                (data,response,error) in
-                let result = self.processMoviesRequest(data: data, error: error)
-                OperationQueue.main.addOperation {
-                    completion(result)
-                }
-            }
-            task.resume()
+        let request = URLRequest(url: url)
+        let task = URLSession.shared.dataTask(with: request) {
+            (data,response,error) in
+            let result = self.processMoviesRequest(data: data, error: error)
+            completion(result)
+//            OperationQueue.main.addOperation {
+//                completion(result)
+//            }
         }
+//        let task = self.session.dataTask(with: request){
+//            (data,response,error) in
+//            let result = self.processMoviesRequest(data: data, error: error)
+//            OperationQueue.main.addOperation {
+//                completion(result)
+//            }
+//        }
+        task.resume()
         
     }
 
@@ -43,6 +49,7 @@ class MovieStore {
         guard let jsonData = data else {
             return .failure(error!)
         }
+
         return TMDB_API.movies(fromJSON: jsonData)
     }
     

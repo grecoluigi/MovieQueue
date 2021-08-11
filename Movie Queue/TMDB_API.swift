@@ -50,8 +50,8 @@ struct TMDB_API {
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "yyyy-MM-dd"
             decoder.dateDecodingStrategy = .formatted(dateFormatter)
-            let tmdbResponse = try decoder.decode(tmdbResponse.self, from: data)
-            let movies = tmdbResponse.movies.filter { $0.poster_path != nil && $0.releaseDate != nil}
+            let tmdbResponseQuery = try decoder.decode(tmdbResponse.self, from: data)
+            let movies = tmdbResponseQuery.movies.filter { $0.poster_path != nil && $0.releaseDate != nil}
             //TODO filtro i risultanti senza poster e senza data, posso considerare di trattare il caso in cui siano nil ma vista la rarità dei film senza anno per adesso li salto
             return .success(movies)
         } catch {
