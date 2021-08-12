@@ -1,6 +1,6 @@
 # MovieQueue
 
-<img src="Screenshots/screen1.png" width="200"><img src="Screenshots/screen2.png" width="200"><img src="Screenshots/screen3.png" width="200"><img src="Screenshots/screen4.png" width="200">
+<img src="Screenshots/screen1.png" width="200"> &nbsp; <img src="Screenshots/screen2.png" width="200"> &nbsp; <img src="Screenshots/screen3.png" width="200"> &nbsp; <img src="Screenshots/screen4.png" width="200">
 
 
 MovieQueue is a simple app that lets you manage a list of movies to watch and randomly pick one from your list for those nights when you can’t decide.
