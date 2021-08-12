@@ -10,6 +10,7 @@ import UIKit
 
 class SearchMovieController : UITableViewController, UISearchBarDelegate {
     let genericPosterImageData = UIImage(named: "moviePosterGeneric")?.pngData()
+    let loadingPosterImageData = UIImage(named: "moviePosterLoading")?.pngData()
     @IBOutlet var searchBar: UISearchBar!
     var store = MovieStore()
     private var pendingRequestWorkItem: DispatchWorkItem?
@@ -86,14 +87,16 @@ class SearchMovieController : UITableViewController, UISearchBarDelegate {
                 case let .success(movies):
                     MovieResults.movieResults.allResults.removeAll()
                     for movie in movies {
+                        let index = movies.firstIndex(where: {$0.title == movie.title})
+                        let indexPath = IndexPath(row: index!, section: 0)
                         MovieResults.movieResults.allResults.append(movie)
-                        movie.thumb = self?.genericPosterImageData
+                        movie.thumb = self?.loadingPosterImageData
                         DispatchQueue.global(qos: .default).async {
                             if let posterPath = movie.poster_path {
                                 let url = URL(string: "https://image.tmdb.org/t/p/original/\(posterPath)")!
                                 if let data = try? Data(contentsOf: url) {
-                                    print("Downloading poster for \(movie.title) ")
                                     movie.thumb = data
+                                    self!.reloadTableData(atIndex: indexPath)
                                 }
                                 else { movie.thumb = self?.genericPosterImageData }
                             }
@@ -111,15 +114,19 @@ class SearchMovieController : UITableViewController, UISearchBarDelegate {
         }
         
         pendingRequestWorkItem = requestWorkItem
-        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(400), execute: requestWorkItem)
-        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(800), execute: reloadTableData)
-                
+        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(400), execute: requestWorkItem)                
     }
     
-    func reloadTableData(){
-        DispatchQueue.main.async {
-            self.tableView.reloadData()
-        }
+    func reloadTableData(atIndex: IndexPath){
+        
+            DispatchQueue.main.async {
+                if self.tableView.numberOfRows(inSection: 0) > atIndex.row {
+                    self.tableView.reloadRows(at: [atIndex], with: .none)
+                }
+            }
+            
+        
+        
     }
     
     override func viewWillDisappear(_ animated: Bool) {

@@ -85,14 +85,7 @@ class ManageTitlesController: UITableViewController {
         tableView.reloadData()
         print("reload data called")
     }
-//    @IBAction func addMovie(_ sender: Any) {
-//        let newMovie = MovieStore.movieStore.addTestMovie()
-//        if let index = MovieStore.movieStore.allMovies.firstIndex(of: newMovie) {
-//            let indexPath = IndexPath(row: index, section: 0)
-//            tableView.insertRows(at: [indexPath], with: .automatic)
-//        }
-//    }
-    
+
     @IBAction func toggleEditingMode(_ sender: UIBarButtonItem) {
         if isEditing {
             sender.title = "Edit"
