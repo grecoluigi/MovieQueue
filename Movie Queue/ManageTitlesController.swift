@@ -50,6 +50,12 @@ class ManageTitlesController: UITableViewController {
             tableView.deleteRows(at: [indexPath], with: .automatic)
         }
     }
+    
+    override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        let movedMovie = MovieStore.movieStore.allMovies[sourceIndexPath.row]
+        MovieStore.movieStore.removeMovie(movedMovie)
+        MovieStore.movieStore.allMovies.insert(movedMovie, at: destinationIndexPath.row)
+    }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
@@ -65,11 +71,6 @@ class ManageTitlesController: UITableViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        //tableView.translatesAutoresizingMaskIntoConstraints = false
-//        tableView.topAnchor.constraint(equalTo: view.bottomAnchor, constant: 10).isActive = true
-//        tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 5).isActive = true
-//        tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -5).isActive = true
-//        tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -10).isActive = true
         overrideUserInterfaceStyle = .dark
         tableView.delegate = self
         tableView.dataSource = self

@@ -15,9 +15,6 @@ class ViewController: UIViewController {
     let genericPosterImageDataRedBlur = UIImage(named: "moviePosterGenericRedBlur")?.pngData()
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
-//        posterImage.layer.masksToBounds = true
-//        posterImage.layer.cornerRadius = 10.0
         overrideUserInterfaceStyle = .dark
         gimmeMovieButton.layer.masksToBounds = true
         gimmeMovieButton.layer.cornerRadius = 10.0
